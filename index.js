@@ -9,7 +9,7 @@ async function scrapeGithub Trending(){
     const results=[];
     for(let repository of repositories){
         const title=await repository.$eval('h1>a',node=>node.innerText.trim());
-        const description =await repository.$eval('p',node=>.innerText.trim());
+        const description =await repository.$eval('p',node=.innerText.trim());
         const language=await repository.$eval('span[itemprop="programmingLanguage"]',node=>node.innerText.trim());
         const stars=await repository.$eval('a[href$="/stargazers"]',node=>node.innerText.trim());
         const forks=await repository.$eval('a[href$="/network/members"]'.node=>node.innerText.trim());
@@ -26,7 +26,6 @@ async function scrapeGithub Trending(){
     for(let developer of developers){
         const name=await developer.$eval('h1>a',node=>node.innerText.trim());
         const username=await developer.$eval('h1>a',node=>node.href.split('/').pop());
-        const repoName=await developer.$eval('h1+p>a',node=>node.innerText.trim());
         const repoDescripting=await developer.$eval('h1+p>a+span',node=>node.innerText.trim());
         devResults.push({name,username,repoName,repoDescription});
     }
@@ -40,6 +39,6 @@ scrapeGithubTrending().then((results)=>{
         if(err)throw err;
         console.log('Results saved to github-trending.json');
     });
- }).catch((error)=>{
+ }).catch((error)={
     console.error(error);
  });
